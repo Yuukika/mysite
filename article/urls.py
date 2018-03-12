@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'^delete-article/$', views.delete_article, name="delete_article"),
     url(r'^edit-article/(?P<article_id>\d+)/$', views.edit_article, name="edit_article"),
     url(r'^list-article-titles/$', list_views.article_list, name="article_titles"),
+    url(r'^list-article-titles/(?P<username>[-\w]+)/$', list_views.article_list, name="author_article"),
     url(r'^list-article-detail/(?P<id>\d+)/(?P<slug>[-\w]+)/$',list_views.article_detail,name='list_article_detail'),
+    url(r'^like-article/$', list_views.like_article, name="like_article"),
 ]

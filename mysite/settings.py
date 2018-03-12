@@ -136,3 +136,8 @@ EMAIL_PORT = 25
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'milanov@163.com'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REDIS_HOST = "localhost"
+REDIS_PORT = "6379"
+REDIS_DB = 0
+

@@ -10,16 +10,7 @@
 <body>
     <div class="container">
         {% include 'article/header.html' %}
-        {% if user.is_authenticated %}
-            <div class="col-md-2">
-                {% include 'article/leftslider.html' %}
-            </div>
-            <div class="col-md-10">
-        {% else %}
-            <div class="col-md-12">
-        {% endif %}
-                {% block content %}{% endblock %}
-            </div>
+        {% block content %}{% endblock %}
         {% include 'footer.html' %}
         {% block javascript %}{% endblock %}
     </div>

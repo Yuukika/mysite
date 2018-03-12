@@ -1,23 +1,30 @@
 {% extends 'article/base.html' %}
 {% load staticfiles %}
-
+{% load article_tags %}
 
 {% block title%}article list{% endblock %}
 {% block content %}
-    <div class="row text-center vertical-middle-sm">
+<div class="container">
+    <div class="col-md-2">
+        {% include 'article/leftslider.html'%}
+    </div>
+    <div class="col-md-10">
+        <div class="row text-center vertical-middle-sm">
         <h1>阅读，丰富头脑，善化行为</h1>
-    </div>
-    <div class="container">
-        {% for article in article_list %}
-        <div class="list_group">
-            <a href="{{ article.get_url_path }}" class="list-group-item active">
-                <h4 class="list-group-item-heading">{{ article.title }}</h4>
-                <p class="list-group-item-list">作者: {{ article.author.username }}</p>
-                <p class="list-group-item-text">摘要: {{ article.body | slice:'70' | linebreaks}} </p>
-            </a>
+        <p>这里已经有{% total_articles %}篇文章供您阅读</p>
         </div>
-        {% endfor %}
-    {% include "paginator.html" %}
+        <div class="container">
+            {% for article in article_list %}
+            <div class="list_group">
+                <a href="{{ article.get_url_path }}" class="list-group-item active">
+                <h4 class="list-group-item-heading">{{ article.title }}</h4>
+                </a>
+                <p class="list-group-item-list">作者: <a href="{% url 'article:author_article' article.author.username %}">{{ article.author.username }}</a></p>
+                <p class="list-group-item-text">摘要: {{ article.body | slice:'70' | linebreaks}} </p>
+            </div>
+            {% endfor %}
+            {% include "paginator.html" %}
+        </div>
     </div>
-
+</div>
 {% endblock %}
