@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title%}Home Page{% endblock %}
+
+
+{% block content %}
+    <div class="text-center">
+        <h1>Welcome</h1>
+        <h3>This is a blog website, you can post articles</h3>
+        <h2>You can login to post your article and read other author's articles</h2>
+        {% load staticfiles %}
+        <img src="{% static 'images/homelogo.jpg' %}" alt="" style="width:400px; height:500px">
+    </div>
+{% endblock%}

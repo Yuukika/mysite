@@ -1,0 +1,6 @@
+awesome-slugify==1.6.5
+Django==1.10.1
+django-password-reset==1.0
+Pillow==5.0.0
+regex==2018.2.21
+Unidecode==0.4.21

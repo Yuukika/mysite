@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+{% block title%}My information{% endblock %}
+
+
+{% block content %}
+    <div class="row text-center vertical-middle-sm">
+        <h1>My Information</h1>
+        <div class="row">
+            <form action="." class='form-horizontal' method='post'>
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>用户名:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>邮箱:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userform.email }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>生日:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userprofileform.birth }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>电话:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userprofileform.phone }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>毕业学校:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userinfoform.school }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>工作单位:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userinfoform.company }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>职业:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userinfoform.profession }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>地址:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userinfoform.address }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <span>自我介绍:</span>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {{ userinfoform.aboutme }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" class='btn btn-primary btn-lg' value = 'submit'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock%}
