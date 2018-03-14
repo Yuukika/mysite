@@ -1,0 +1,119 @@
+{% extends 'article/base.html' %}
+{% load staticfiles %}
+
+
+{% block title%}article tags{% endblock %}
+
+
+{% block content %}
+    <div>
+        <p class="text-right">
+            <button class="btn btn-primary" id='add_tag' onclick="add_tag()">添加</button>
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <td>序号</td>
+                <td>标签名称</td>
+                <td>操作</td>
+            </tr>
+            {% for tag in tags %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tag.tag }}</td>
+                <td>
+                    <a name="edit" href="javascript:" onclick="edit_tag(this, {{tag.id}})"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a name="delete" href="javascript:" onclick="del_tag(this, {{tag.id}})"><span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span></a>
+                </td>
+            </tr>
+            {% empty %}
+            <p>还没有设置标签</p>
+            {% endfor %}
+        </table>
+    </div>
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/layer.js' %}"></script>
+    <script>
+        function add_tag(){
+            var index = layer.open({
+                type:1,
+                skin:'layui-layer-rim',
+                area:['400px', '200px'],
+                title:'新增栏目',
+                content: '<div class="text-center" style="margin-top:20px"><p>请输入新的栏目名称</p><p>{{ articletagform.tag }}</p></div>',
+                btn:['确定','取消'],
+                yes: function(index, layero){
+                    tag_name = $('#id_tag').val();
+                    //alert(column_name);
+                    $.ajax({
+                        url: '{% url "article:article_tag" %}',
+                        type:"POST",
+                        data: {"tag":tag_name},
+                        success: function(e){
+                            if(e=='1'){
+                                parent.location.reload();
+                                layer.msg("good");
+                            }else{
+                                layer.msg('此标签已有，请更换名称')
+                            }
+                        },
+                    });
+                },
+                btn2: function(index, layero){
+                    layer.close(index);
+                }
+            });
+        }
+        function edit_tag(the, tag_id){
+            var name = $(the).parents('tr').children('td').eq(1).text();
+            var index = layer.open({
+                type:1,
+                skin:"layui-layer-rim",
+                area:['400px','200px'],
+                title:"编辑标签",
+                content: '<div class="text-center" style="marigin-top:20px"><p>请编辑的标签名称</p><p><input type="text" id="new_name" value="'+name+'"/></p></div>',
+                btn:['确定','取消'],
+                yes: function(index, layero){
+                    new_name = $("#new_name").val();
+                    $.ajax({
+                        url: "{% url 'article:rename_article_tag' %}",
+                        type:"POST",
+                        data: {"tag_id": tag_id, "tag_name": new_name},
+                        success: function(e){
+                            if(e=="1"){
+                                parent.location.reload();
+                                layer.msg("good");
+                            }else{
+                                layer.msg("新的名称没有保存，修改失败")
+                            }
+                        },
+                    });
+                },
+            });
+        }
+        function del_tag(the, tag_id){
+            var index = layer.open({
+                type:1,
+                skin:"layui-layer-rim",
+                area:['400px','200px'],
+                title:"编辑栏目",
+                content: '<div class="text-center" style="marigin-top:20px"><p>确定要删除这个标签吗</p></div>',
+                btn:['确定','取消'],
+                yes: function(index, layero){
+                    $.ajax({
+                        url: "{% url 'article:delete_article_tag' %}",
+                        type:"POST",
+                        data: {"tag_id": tag_id},
+                        success: function(e){
+                            if(e=="1"){
+                                parent.location.reload();
+                                layer.msg("删除成功");
+                            }else{
+                                layer.msg("删除失败")
+                            }
+                        },
+                    });
+                },
+            });
+        }
+    </script>
+{% endblock%}

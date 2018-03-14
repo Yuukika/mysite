@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ArticleColumn,ArticlePost
+from .models import ArticleColumn,ArticlePost,Articletag
 
 class ArticleColumnAdmin(admin.ModelAdmin):
     list_display = ('column',)
@@ -10,5 +10,8 @@ class ArticleColumnAdmin(admin.ModelAdmin):
 class ArticlePostAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
+class ArticleTagAdmin(admin.ModelAdmin):
+    list_display = ('tag',)
 admin.site.register(ArticleColumn, ArticleColumnAdmin)
 admin.site.register(ArticlePost, ArticlePostAdmin)
+admin.site.register(Articletag, ArticleTagAdmin)

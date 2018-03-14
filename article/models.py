@@ -11,7 +11,20 @@ class ArticleColumn(models.Model):
     def __str__(self):
         return self.column
 
+
+
+
+class Articletag(models.Model):
+    author = models.ForeignKey(User, related_name="tag")
+    tag = models.CharField(max_length=50)
+    def __str__(self):
+        return self.tag
+
+
+
+
 class ArticlePost(models.Model):
+    article_tag = models.ManyToManyField(Articletag, related_name="article_tag")
     author = models.ForeignKey(User,related_name="article")
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=500)
